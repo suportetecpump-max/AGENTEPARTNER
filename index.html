@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1266d6">
+<title>Portal Partner</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>Portal Partner</h1>
+  <button id="btn-config-toggle" class="icon-btn" title="Configurar login">&#9881;</button>
+</header>
+
+<main class="box">
+
+  <!-- ================= CONFIG ================= -->
+  <section id="view-config" class="view">
+    <h2>Configurar login</h2>
+    <p>Esses dados ficam salvos só neste aparelho (localStorage).</p>
+
+    <label for="cfg-login">E-mail / login</label>
+    <input id="cfg-login" type="text" autocomplete="username">
+
+    <label for="cfg-senha">Senha</label>
+    <input id="cfg-senha" type="password" autocomplete="current-password">
+
+    <label for="cfg-cod-user">Código usuário (Usuário Partner)</label>
+    <input id="cfg-cod-user" type="text" inputmode="numeric" placeholder="Ex: 1579">
+
+    <label for="cfg-nome">Seu nome (usado como solicitante)</label>
+    <input id="cfg-nome" type="text" placeholder="Ex: Michel">
+
+    <label for="cfg-api">Endereço da API do bot (/executar)</label>
+    <input id="cfg-api" type="text" placeholder="https://seu-dominio.com/executar">
+
+    <button type="button" id="btn-cfg-salvar">Salvar</button>
+    <div id="status-config" class="status"></div>
+  </section>
+
+  <!-- ================= APP ================= -->
+  <section id="view-app" class="view" style="display:none;">
+
+    <div class="tabs">
+      <button type="button" class="tab-btn active" data-tab="ocorrencia">Nova Ocorrência</button>
+      <button type="button" class="tab-btn" data-tab="realizado">Realizado</button>
+      <button type="button" class="tab-btn" data-tab="buscar">Buscar</button>
+    </div>
+
+    <!-- --- Nova Ocorrência --- -->
+    <div id="tab-ocorrencia" class="tab-content active">
+      <form id="form-ocorrencia">
+        <label for="oc-cliente">Qual o cliente?</label>
+        <input id="oc-cliente" placeholder="Código, nome, CPF ou CNPJ" autocomplete="off" required>
+
+        <label for="oc-solicitante">Qual o solicitante?</label>
+        <input id="oc-solicitante" autocomplete="off" required>
+
+        <label for="oc-motivo">Qual o motivo?</label>
+        <textarea id="oc-motivo" required></textarea>
+
+        <label for="oc-chegada">Horário de chegada (opcional)</label>
+        <input id="oc-chegada" placeholder="00:00" maxlength="5">
+
+        <button type="submit">Criar ocorrência</button>
+      </form>
+      <div id="status-ocorrencia" class="status"></div>
+    </div>
+
+    <!-- --- Realizado --- -->
+    <div id="tab-realizado" class="tab-content">
+
+      <div id="realizado-lista-view">
+        <button type="button" id="btn-listar">Buscar agenda (abertas)</button>
+        <div id="status-realizado" class="status"></div>
+        <div id="lista-agenda"></div>
+      </div>
+
+      <div id="realizado-detalhe-view" style="display:none;">
+        <button type="button" class="voltar-btn btn-voltar">&#8592; Voltar para a lista</button>
+
+        <div id="contexto-ocorrencia" class="resultado"></div>
+
+        <label for="servico-realizado">Serviço realizado</label>
+        <textarea id="servico-realizado" placeholder="Descreva o que foi feito nesse atendimento..."></textarea>
+
+        <button type="button" id="btn-finalizar">Finalizar ocorrência</button>
+        <div id="status-detalhe" class="status"></div>
+      </div>
+
+    </div>
+
+    <!-- --- Buscar --- -->
+    <div id="tab-buscar" class="tab-content">
+      <form id="form-buscar">
+        <label for="buscar-query">CPF, CNPJ ou código do cliente</label>
+        <input id="buscar-query" autocomplete="off" required>
+        <button type="submit">Buscar</button>
+      </form>
+      <div id="status-buscar" class="status"></div>
+      <div id="lista-buscar"></div>
+    </div>
+
+    <div class="config-link">
+      <a id="link-config">Trocar login</a>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
